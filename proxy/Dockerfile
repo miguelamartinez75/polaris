@@ -1,7 +1,7 @@
 FROM nginxinc/nginx-unprivileged:1-alpine
 LABEL maintainer="tierradelfuego.gob.ar"
 
-COPY ./default.conf.tpl /etc/nginx/deps.conf.tpl
+COPY ./default.conf.tpl /etc/nginx/default.conf.tpl
 COPY ./uwsgi_params /etc/nginx/uwsgi_params
 COPY ./run.sh /run.sh
 
@@ -11,7 +11,7 @@ ENV APP_PORT=9000
 
 USER root
 
-RUN mkdri -p /vol/static
+RUN mkdir -p /vol/static
 RUN chmod 755 /vol/static
 RUN touch /etc/nginx/conf.d/default.conf
 RUN chown nginx:nginx /etc/nginx/conf.d/default.conf
